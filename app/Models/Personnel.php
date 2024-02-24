@@ -15,5 +15,6 @@ class Personnel extends Model
         'en_name',
         'salary',
         'devicecode',
+        'is_active'
     ];
 }
