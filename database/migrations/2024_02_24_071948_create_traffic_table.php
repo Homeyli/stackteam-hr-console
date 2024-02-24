@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('traffic', function (Blueprint $table) {
             $table->id();
+            $table->integer('personnel_id');
+            $table->timestamp('fingred_at', $precision = 0);
             $table->timestamps();
         });
     }
