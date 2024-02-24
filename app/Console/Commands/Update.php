@@ -31,10 +31,14 @@ class Update extends Command
         // ]);
 
         $file = file(resource_path('6160062162713_attlog.dat'));
+        $data = [];
+
         foreach ($file as $key => $value) {
-            $file[$key] = explode("\t",ltrim($value)); 
+
+            $record = explode("\t",ltrim($value)); 
+            array_push($data,['device_code' => $record[0],'fingred_at' => $record[1]]); 
         }
 
-        print_r($file);
+        print_r($data);
     }
 }
