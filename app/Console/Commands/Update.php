@@ -25,9 +25,16 @@ class Update extends Command
      */
     public function handle()
     {
-        $this->table(['code','name','family'],[
-            [1,'mahdi','homeily'],
-            [2,'amir','askari']
-        ]);
+        // $this->table(['code','name','family'],[
+        //     [1,'mahdi','homeily'],
+        //     [2,'amir','askari']
+        // ]);
+
+        $file = file(resource_path('6160062162713_attlog.dat'));
+        foreach ($file as $key => $value) {
+            $file[$key] = explode("\t",ltrim($value)); 
+        }
+
+        print_r($file);
     }
 }
