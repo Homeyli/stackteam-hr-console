@@ -46,6 +46,9 @@ class Update extends Command
         $file = file(resource_path('6160062162713_attlog.dat'));
         $data = [];
 
+        $bar = $this->output->createProgressBar(count($file));
+        $bar->start();
+
         foreach ($file as $key => $value) {
 
             $record = explode("\t",ltrim($value)); 
@@ -68,15 +71,15 @@ class Update extends Command
             $_record = ['personnel_id' => $personnel_id,'fingred_at' => $fingred_at];
             
             if($traffic = Traffic::updateOrCreate($_record,$_record)) {
-                $this->info('One Record added');
+                $bar->advance();
             }
 
             array_push($data,$_record); 
         }
 
+        $bar->finish();
+        $this->info ("\tdata updated");
         // end read file -----------------------------------------------------
-
-        print_r($data);die();
 
 
         
