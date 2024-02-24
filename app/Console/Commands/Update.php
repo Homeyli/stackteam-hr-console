@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Personnel;
+use App\Models\Traffic;
 
 class Update extends Command
 {
@@ -61,11 +62,23 @@ class Update extends Command
                 }
             }
 
-            array_push($data,['personnel_id' => $personnels[$record[0]],'fingred_at' => $record[1]]); 
+            $personnel_id = $personnels[$record[0]];
+            $fingred_at = $record[1];
+
+            $_record = ['personnel_id' => $personnel_id,'fingred_at' => $fingred_at];
+            
+            if($traffic = Traffic::updateOrCreate($_record,$_record)) {
+                $this->info('One Record added');
+            }
+
+            array_push($data,$_record); 
         }
 
         // end read file -----------------------------------------------------
 
-        print_r($data);
+        print_r($data);die();
+
+
+        
     }
 }
