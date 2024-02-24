@@ -27,6 +27,7 @@ class CalcSalary extends Command
      */
     public function handle()
     {
-
+        $_personnels = Personnel::select(['id','devicecode','en_name'])->where('is_active',true)->get();
+    
     }
 }
