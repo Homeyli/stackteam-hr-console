@@ -72,25 +72,38 @@ class CalcSalary extends Command
             array_push($trafficDateList[$dateTime[0]],$dateTime[1]);
         }
 
-        $tableHeader = ['#','Date','Entry','Exit'];
+        
         $tableRecords = [];
 
-        // $this->table(['code','name','family'],[
-        //     [1,'mahdi','homeily'],
-        //     [2,'amir','askari']
-        // ]);
-        
         $counter = 1;
+        $ioCount = 1;
+
         foreach ($trafficDateList as $date => $times) {
+
             $record = [$counter++,$date];
             $record = array_merge($record,$times);
 
-            array_push($tableRecords,$record);
+            if (($countRecord = count($times)) > $ioCount) {
+                $ioCount = $countRecord;
+            }
+
+            die('#' . strtotime('17:47:58') - strtotime('11:07:50'));
+            foreach ($times as $time) {
+                die($time);
+            }
+
+            array_push($tableRecords,$record);        
         }
 
-        //print_r($tableRecords);die();
+        $ioCount = ($ioCount & 1) ? (++$ioCount / 2) : ($ioCount / 2) ;
+        $tableHeader = ['#','Date'];
+        
+        for($i=1;$i<=$ioCount;$i++) {
+            array_push($tableHeader,'Entry','Exit');
+        }
 
         $this->table($tableHeader,$tableRecords);
+        $this->info("count : " . $ioCount);
         
     }
 
