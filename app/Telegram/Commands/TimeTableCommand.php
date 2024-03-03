@@ -28,30 +28,18 @@ class TimeTableCommand extends Command
 
     public function handle()
     {
-        // $this->output = $this->table(['#id','Firstname','Lastname'],[
-        //     ['1','Mehdi','Homeily'],
-        //     ['1','amir','askari']
+
+
+        $this->replyWithHTML('telegram.test');
+
+        // $this->replyWithTable(['#','Firstname','Lastname','Entry','Exit'],[
+        //     ['1',"Mehdi",'Homeily','No Entry i\'m Owner!','No Eqit']
         // ]);
 
-
-        //$this->replyWithTable("<pre>" . $this->output . "</pre>");
-        $view = view('telegram.test');
-        $this->replyWithTable($view->render());
-
     }
 
 
-    public function table($headers, $rows)
-    {
-        $output = '';
-        $mask = "|%5s |%-30s | x |\n";
 
-        $output .= sprintf($mask, ['Num', 'Title']);
-        $output .= sprintf($mask, '1', 'A value that fits the cell');
-        $output .= sprintf($mask, '2', 'A too long value that will brake the table');
-
-        return $output;
-    }
 
 
 
