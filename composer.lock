@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8aef603093fa0ea7f5fac9ac734b6129",
+    "content-hash": "dd07f5844df408c418b91e791669cdbb",
     "packages": [
         {
             "name": "brick/math",
@@ -3509,6 +3509,78 @@
                 }
             ],
             "time": "2023-11-08T05:53:05+00:00"
+        },
+        {
+            "name": "reinvanoyen/oak",
+            "version": "1.0.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reinvanoyen/oak.git",
+                "reference": "7728d61c695d824783d1e0d496d463870602d86e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reinvanoyen/oak/zipball/7728d61c695d824783d1e0d496d463870602d86e",
+                "reference": "7728d61c695d824783d1e0d496d463870602d86e",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Oak\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Rein Van Oyen",
+                    "email": "reinvanoyen@gmail.com"
+                }
+            ],
+            "description": "Simple PHP building block framework",
+            "keywords": [
+                "container",
+                "dependency injection",
+                "facade",
+                "framework",
+                "library"
+            ],
+            "support": {
+                "issues": "https://github.com/reinvanoyen/oak/issues",
+                "source": "https://github.com/reinvanoyen/oak/tree/1.0.13"
+            },
+            "time": "2020-01-21T10:27:17+00:00"
+        },
+        {
+            "name": "reinvanoyen/oak-console-table",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reinvanoyen/oak-console-table.git",
+                "reference": "ffc18be99517b922e69c525ec95f0f49d3fd89e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reinvanoyen/oak-console-table/zipball/ffc18be99517b922e69c525ec95f0f49d3fd89e3",
+                "reference": "ffc18be99517b922e69c525ec95f0f49d3fd89e3",
+                "shasum": ""
+            },
+            "require": {
+                "reinvanoyen/oak": "^1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tnt\\ConsoleTable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Console tables for Oak commands",
+            "support": {
+                "issues": "https://github.com/reinvanoyen/oak-console-table/issues",
+                "source": "https://github.com/reinvanoyen/oak-console-table/tree/1.0.2"
+            },
+            "time": "2019-09-19T11:54:12+00:00"
         },
         {
             "name": "symfony/console",
