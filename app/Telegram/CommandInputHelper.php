@@ -9,10 +9,17 @@ trait CommandInputHelper {
 
     private ?BotUser $user = null;
     
+    protected function replyWithTable ($text) {
 
-    public function replyWithTableMessage($table,$text) {
-
+        return $this->getTelegram()->sendMessage([
+            
+            'chat_id' => $this->getUpdate()->getMessage()->from->id,
+            'text' => $text,
+            'parse_mode' => 'html'
+        ]);
     }
+
+    
     
     public function askWithMessage($text) {
 
