@@ -3,9 +3,12 @@
 namespace App\Telegram;
 
 use Telegram\Bot\Laravel\Facades\Telegram;
+use App\Models\BotUser;
 
 trait CommandInputHelper {
 
+    private ?BotUser $user = null;
+    
 
     public function replyWithTableMessage($table,$text) {
 
@@ -42,5 +45,25 @@ trait CommandInputHelper {
 
             usleep(100);
         }
+    }
+
+    protected function getUser() {
+
+        if (is_null ($this->user)) {
+
+            $this->user = BotUser::updateOrCreate(
+                ['telegram_id' => $this->getUpdate()->getMessage()->from->id],
+                [
+                    // Update or create data
+                    'username' => $this->getUpdate()->getMessage()->from->username,
+                    'first_name' => $this->getUpdate()->getMessage()->from->first_name,
+                    'last_name' => $this->getUpdate()->getMessage()->from->last_name,
+                    'is_bot' => $this->getUpdate()->getMessage()->from->is_bot,
+
+                ]
+            );
+        }
+
+        return $this->user;
     }
 }
