@@ -16,7 +16,8 @@ class StartCommand extends Command
 
     public function handle()
     {
-
+        
+        print_r($this->getUpdate());die();
         $this->replyWithMessage([
             'text' => "سلام زهرا، به چت بات مدیریت پرسونلی استک تیم خوش آمدی ",
         ]);
@@ -30,7 +31,7 @@ class StartCommand extends Command
 
 
     protected function getUser() {
-        
+
     }
 
 }

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('bot_users', function (Blueprint $table) {
             $table->id();
+            $table->integer('telegram_id');
+            $table->boolean('is_bot')->default(false);
+            $table->string('first_name',255)->nullable();
+            $table->string('last_name',255)->nullable();
+            $table->string('username',255);
             $table->timestamps();
         });
     }
