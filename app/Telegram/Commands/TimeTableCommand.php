@@ -11,6 +11,8 @@ use Hekmatinasser\Verta\Verta;
 use App\Models\TimeTable;
 use Illuminate\Support\Facades\Lang;
 
+use App\Services\HRCalc;
+
 class TimeTableCommand extends Command
 {
 
@@ -44,12 +46,15 @@ class TimeTableCommand extends Command
 
         $table = ['header' => Lang::get('telegram.timetableheader'),'rows' => $timeTable->toArray()];
         
-        //print_r($timeTable->toArray());die();
-        
         $this->replyWithHTML('telegram.timetable',[
             'table' => $table,
             'firstname' => $this->getUser()->first_name
         ]);
+
+
+        $hr = HRCalc::user($this->getUser());
+        print_r($hr->getPersonnel()->toArray());die();
+        
 
         // $this->replyWithTable(['#','Firstname','Lastname','Entry','Exit'],[
         //     ['1',"Mehdi",'Homeily','No Entry i\'m Owner!','No Eqit']
