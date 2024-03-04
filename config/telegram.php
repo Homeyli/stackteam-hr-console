@@ -37,7 +37,8 @@ return [
             'webhook_url' => env('TELEGRAM_WEBHOOK_URL', 'YOUR-BOT-WEBHOOK-URL'),
             'commands' => [
                 App\Telegram\Commands\StartCommand::class,
-                App\Telegram\Commands\TimeTableCommand::class
+                App\Telegram\Commands\TimeTableCommand::class,
+                App\Telegram\Commands\SalaryCommand::class
             ],
         ],
 

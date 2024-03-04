@@ -27,9 +27,10 @@ class TimeTableCommand extends Command
 
         // get now jalali date ..
         $verta = new Verta();
-        $jalaliNow = $verta->now('asia/tehran')->format('Y-m');
-        $jalaliNow = explode('-',$jalaliNow);
+        $_jalaliNow = $verta->now('asia/tehran')->format('Y-m');
+        $jalaliNow = explode('-',$_jalaliNow);
 
+        $hr = HRCalc::user($this->getUser());
 
         // fech time table for date!
         $timeTable = TimeTable::select([
@@ -43,22 +44,17 @@ class TimeTableCommand extends Command
             $timeTable[$index] = array_values($item->toArray());
         }
 
-
         $table = ['header' => Lang::get('telegram.timetableheader'),'rows' => $timeTable->toArray()];
         
         $this->replyWithHTML('telegram.timetable',[
             'table' => $table,
-            'firstname' => $this->getUser()->first_name
+            'month' => Lang::get('telegram.months-jalali')[$jalaliNow[1]],
+            'year' => $jalaliNow[0],
+            'totalhours' => $timeTable[$jalaliNow[1]-1][5],
+            'salary' => $hr->getPersonnelApprovedSalary(),
+            'hourssalary' => $hr->getPersonnelHoursSalary(),
+            'firstname' => $hr->getPersonnel()->firstname
         ]);
-
-
-        $hr = HRCalc::user($this->getUser());
-        print_r($hr->getPersonnel()->toArray());die();
-        
-
-        // $this->replyWithTable(['#','Firstname','Lastname','Entry','Exit'],[
-        //     ['1',"Mehdi",'Homeily','No Entry i\'m Owner!','No Eqit']
-        // ]);
 
     }
 

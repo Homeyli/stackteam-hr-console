@@ -72,7 +72,7 @@ class DrawTable extends Component
 
         $output .= $_line;
 
-        return "<pre>$output</pre>";
+        return '<pre><code>' . $output . '</code></pre>';
 
     }
 }
