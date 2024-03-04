@@ -4,6 +4,11 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Hekmatinasser\Verta\Verta;
+
+use Illuminate\Support\Facades\Lang;
+
+use App\Models\TimeTable;
 
 class BotServer extends Command
 {
@@ -26,6 +31,12 @@ class BotServer extends Command
      */
     public function handle()
     {
+
+
+
+
+        // --------------------------------------------------------------------
+
         while(true) {
 
             $update = Telegram::commandsHandler(false);

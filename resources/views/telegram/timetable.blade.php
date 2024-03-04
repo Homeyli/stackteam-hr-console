@@ -1,1 +1,2 @@
-<x-draw-table :headers="['#id','Firstname','Lastname']" :rows="[['1','abdulrazaq','Homeily'],['1','amir','askari']]"></x-draw-table>
+سلام <b>{{ $firstname }}</b>، جدول ساعت کاری در سال 1402 به شرح زیر است
+<x-draw-table :headers="$table['header']" :rows="$table['rows']"></x-draw-table>

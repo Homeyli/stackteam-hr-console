@@ -36,7 +36,9 @@ class DrawTable extends Component
     {
 
         $_tbl = $this->rows;
-        array_unshift($_tbl,$this->headers);;
+        array_unshift($_tbl,$this->headers);
+
+        //print_r($_tbl);die();
 
         $_rowlens = [];
         
@@ -46,7 +48,7 @@ class DrawTable extends Component
             }
         }
 
-        $output = '';
+        $output = "";
         $_line = '';
 
         foreach($_rowlens as $total) {
@@ -62,7 +64,7 @@ class DrawTable extends Component
 
 
                 $rLen = ($_rowlens[$index] - strlen($value)) +1;
-                $output .= '| ' . $value . str_repeat(' ',$rLen);
+                $output .= '| ' . $value . str_repeat(" ",$rLen);
             }
 
             $output .= "|\n";
