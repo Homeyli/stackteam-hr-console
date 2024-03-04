@@ -30,4 +30,8 @@ class HRCalc {
 
         return $this->personnel;
     }
+
+    public function getPersonnelSalary() {
+        
+    }
 }
