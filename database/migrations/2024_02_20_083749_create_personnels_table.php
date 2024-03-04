@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('firstname',255)->nullable();
             $table->string('lastname',255)->nullable();
             $table->string('en_name',255)->nullable();
-            $table->float('salary');
             $table->integer('devicecode');
+            $table->integer('bot_user_id')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
