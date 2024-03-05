@@ -4,11 +4,13 @@ namespace App\Telegram;
 
 use Telegram\Bot\Laravel\Facades\Telegram;
 use App\Models\BotUser;
-
+use Telegram\Bot\Keyboard\Keyboard;
 trait CommandInputHelper {
 
     private ?BotUser $user = null;
     
+    public function replyKeyboardMarkup(array $params) { return Keyboard::make($params); }
+
     protected function replyWithTable ($headers,$rows) {
 
         $_tbl = $rows;
@@ -55,28 +57,26 @@ trait CommandInputHelper {
     }
 
     
-    protected function replyWithHTML ($html,$viewdata=[]) {
+    protected function replyWithHTML ($html,$viewdata=[],$request=[]) {
 
         
         if(view()->exists($html)) {
             $html = view($html,$viewdata)->render();
         }
 
-        return $this->getTelegram()->sendMessage([
-            
-            'chat_id' => $this->getUpdate()->getMessage()->from->id,
+        return $this->replyWithMessage(array_merge($request,[
             'text' => $html,
             'parse_mode' => 'html'
-        ]);
+        ]));
+
     }
 
     
     
-    public function askWithMessage($text) {
+    public function askWithMessage($text,$request=[]) {
 
-        $this->replyWithMessage([
-            'text' => $text,
-        ]);
+        $this->replyWithMessage(array_merge($request,['text' => $text]));
+
 
         return $this->receiveData(); 
 

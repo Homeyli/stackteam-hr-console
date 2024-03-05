@@ -9,12 +9,12 @@ use App\Services\HRCalc;
 use Illuminate\Support\Facades\Lang;
 use Telegram\Bot\Api as Telegram;
 
-class SalaryCommand extends Command
+class CustomSalaryCommand extends Command
 {
 
     use CommandInputHelper;
 
-    protected string $name = 'salary';
+    protected string $name = 'customsalary';
     protected string $description = 'Start Command to get you started';
 
     protected $hr = null;
@@ -23,8 +23,27 @@ class SalaryCommand extends Command
     {
 
         $this->hr = HRCalc::user($this->getUser());
-        $this->calcSalary($this->hr->lastMonth());
+        
+        $reply_markup = $this->replyKeyboardMarkup([
+            'keyboard' => Lang::get('telegram.months-keyboard'),
+            'resize_keyboard' => true,
+            'one_time_keyboard' => true
+        ]);
+
+        $result = $this->askWithMessage('لطفا ماه مورد نظر را وارد کنید',[
+            'reply_markup' => $reply_markup
+        ]);
+
+        $verta = new Verta();
+        $month = array_search($result,Lang::get('telegram.months-jalali'));
+        $year = $time = $verta->now('asia/tehran')->format('Y');
+    
+        $time = "$year-$month";
+
+        $this->calcSalary($time);
     }
+
+    
 
     public function calcSalary($time) {
 
@@ -39,10 +58,10 @@ class SalaryCommand extends Command
             'firstname' => $this->hr->getPersonnel()->firstname,
             'month' => Lang::get('telegram.months-jalali')[$exTime[1]],
             'year' => $exTime[0],
-            'totalhours' => $this->hr->getApprovedWorkingHours(),
+            'totalhours' => $this->hr->getApprovedWorkingHours($time),
             'approvedsalary' => $this->hr->getPersonnelApprovedSalary($time),
             'totalworkinghours' => $calcHours['total'],
-            'hourssalary' => $this->hr->getPersonnelHoursSalary(),
+            'hourssalary' => $this->hr->getPersonnelHoursSalary($time),
             'salary' => $this->hr->getPersonalSalary($time,$calcHours['totalseconds'])
 
         ]);

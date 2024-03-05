@@ -38,7 +38,8 @@ return [
             'commands' => [
                 App\Telegram\Commands\StartCommand::class,
                 App\Telegram\Commands\TimeTableCommand::class,
-                App\Telegram\Commands\SalaryCommand::class
+                App\Telegram\Commands\SalaryCommand::class,
+                App\Telegram\Commands\CustomSalaryCommand::class
             ],
         ],
 

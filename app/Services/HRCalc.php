@@ -88,6 +88,8 @@ class HRCalc {
             $verta = new Verta();
             $time = $verta->now('asia/tehran')->format('Y-m');
         }
+
+        //die($time);
         
         $exTime = explode('-',$time);
         $_workingHours = TimeTable::where('year',$exTime[0])->where('month',$exTime[1])->select(['totalhours'])->first();
