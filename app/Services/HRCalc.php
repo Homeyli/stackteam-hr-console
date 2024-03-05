@@ -41,7 +41,7 @@ class HRCalc {
         
         if (empty($this->salary)) {
 
-            $_salary = Salary::where('personnel_id',1)->get();
+            $_salary = Salary::where('personnel_id',$this->getPersonnel()->id)->get();
             foreach($_salary as $item) {
                 $this->salary[$item->year . '-' . $item->month] = $item->amount;
             }    
