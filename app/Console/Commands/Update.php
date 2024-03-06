@@ -40,6 +40,7 @@ class Update extends Command
             $personnels[$value['devicecode']] = $value['id']; 
         }
         unset($_personnels);
+
         // end get personnels data -----------------------------------------
 
         // read file -------------------------------------------------------
@@ -58,7 +59,6 @@ class Update extends Command
                 if($_p = Personnel::create([
                     'en_name' => 'Unknow',
                     'devicecode' => $record[0],
-                    'salary' => '0',
                     'is_active' => false
                 ])) {
 

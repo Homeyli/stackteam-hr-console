@@ -13,7 +13,6 @@ class Personnel extends Model
         'firstname',
         'lastname',
         'en_name',
-        'salary',
         'devicecode',
         'is_active'
     ];
