@@ -9,12 +9,12 @@ use App\Services\HRCalc;
 use Illuminate\Support\Facades\Lang;
 use Telegram\Bot\Api as Telegram;
 
-class CustomSalaryCommand extends Command
+class RewardYearCommand extends Command
 {
 
     use CommandInputHelper;
 
-    protected string $name = 'customsalary';
+    protected string $name = 'rewardyear';
     protected string $description = 'Start Command to get you started';
 
     protected $hr = null;
@@ -24,24 +24,45 @@ class CustomSalaryCommand extends Command
 
         $this->hr = HRCalc::user($this->getUser());
         
-        $reply_markup = $this->replyKeyboardMarkup([
-            'keyboard' => Lang::get('telegram.months-keyboard'),
-            'resize_keyboard' => true,
-            'one_time_keyboard' => true
+        $totaltime = 2120;
+        $allsec = 0;
+        for($i = 4;$i<=12;$i++) {
+
+            $o = $this->hr->getEntryExitData('1402-' . $i);
+            $calcHours = $this->hr->getEntryExitTable($o);
+
+            $allsec += $calcHours['totalseconds'];
+            //die($this->getTotalTraficTime($calcHours['totalseconds']));
+        }
+
+        $h = $this->getTotalTraficH($allsec);
+        $reward = ((7300000 * $h)) / $totaltime;
+
+        $this->replyWithHTML('telegram.reward',[
+
+            'totaltime' => $totaltime,
+            'totalh' => $h,
+            'reward' => $reward 
+
         ]);
+    }
 
-        $result = $this->askWithMessage('لطفا ماه مورد نظر را وارد کنید',[
-            'reply_markup' => $reply_markup
-        ]);
+    private function getTotalTraficTime($seconds) {
 
-        $verta = new Verta();
-        $month = array_search($result,Lang::get('telegram.months-jalali'));
-        $year = $verta->now('asia/tehran')->format('Y');
-    
-        $time = "$year-$month";
+        $H = floor($seconds / 3600);
+        $i = ($seconds / 60) % 60;
+        $s = $seconds % 60;
 
-        //die($time);
-        $this->calcSalary($time);
+        return "$H:$i:$s";
+    }
+
+    private function getTotalTraficH($seconds) {
+
+        $H = floor($seconds / 3600);
+        $i = ($seconds / 60) % 60;
+        $s = $seconds % 60;
+
+        return "$H";
     }
 
     

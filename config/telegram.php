@@ -1,5 +1,6 @@
 <?php
 
+use App\Telegram\Commands\RewardYearCommand;
 use Telegram\Bot\Commands\HelpCommand;
 
 return [
@@ -39,7 +40,8 @@ return [
                 App\Telegram\Commands\StartCommand::class,
                 App\Telegram\Commands\TimeTableCommand::class,
                 App\Telegram\Commands\SalaryCommand::class,
-                App\Telegram\Commands\CustomSalaryCommand::class
+                App\Telegram\Commands\CustomSalaryCommand::class,
+                RewardYearCommand::class
             ],
         ],
 

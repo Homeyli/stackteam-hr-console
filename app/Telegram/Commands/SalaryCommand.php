@@ -22,8 +22,8 @@ class SalaryCommand extends Command
     public function handle()
     {
 
-        $this->hr = HRCalc::user($this->getUser());
-        $this->calcSalary($this->hr->lastMonth());
+        // $this->hr = HRCalc::user($this->getUser());
+        // $this->calcSalary($this->hr->lastMonth());
     }
 
     public function calcSalary($time) {

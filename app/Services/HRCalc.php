@@ -92,6 +92,7 @@ class HRCalc {
         //die($time);
         
         $exTime = explode('-',$time);
+        //print_r($exTime);die();
         $_workingHours = TimeTable::where('year',$exTime[0])->where('month',$exTime[1])->select(['totalhours'])->first();
 
         return $_workingHours->totalhours;
@@ -102,12 +103,13 @@ class HRCalc {
         if (is_null($time)) {
 
             $verta = new Verta();
-            $time = $verta->now('asia/tehran')->format('Y-m');
+            $time = $verta->now('asia/tehran')->format('Y-M');
         }
 
         $exTime = explode('-',$time);
         $_d_end = ($exTime[1] < 7) ? 31 : (($exTime[1] == 12) ? 29 : 30);
 
+        //print_r($exTime);die ($time);
         $startDate = Verta::parse("$time-01")->datetime()->format('Y-m-d');
         $endDate = Verta::parse("$time-$_d_end")->datetime()->format('Y-m-d');
 
@@ -128,11 +130,13 @@ class HRCalc {
 
             $verta = new Verta();
             $_jalaliNow = $verta->now('asia/tehran')->format('Y-m');
+            //die ($_jalaliNow);
         }
 
         $exTime = explode('-',$_jalaliNow);
+        //print_r($exTime);die ($_jalaliNow);
 
-        if ($exTime[1] === 1) {
+        if ($exTime[1] === '01') {
 
             $exTime[1] = 12;
             $exTime[0]--;
@@ -141,12 +145,14 @@ class HRCalc {
             $exTime[1]--;
         }
 
+        //die($exTime[0] . '-' . $exTime[1]);
         return $exTime[0] . '-' . $exTime[1];
     }
 
 
     public function getEntryExitTable($traficlist) {
 
+        $trafficDateList = [];
         foreach ($traficlist as $k => $traffic) {
 
             $dateTime = explode(' ',$traffic->fingred_at);
